@@ -1,3 +1,5 @@
+/** \file */
+
 /* SPMG/JPEG-LS IMPLEMENTATION V.2.1
    =====================================
    These programs are Copyright (c) University of British Columbia. All rights reserved.
@@ -77,7 +79,7 @@ int N[TOT_CONTEXTS],
 void prepareLUTs()
 {
 	int i, j, idx, lmax;
-	byte k;
+	uint8_t k;
 
 	lmax = min(alpha,lutmax);
 	

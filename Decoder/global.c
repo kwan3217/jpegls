@@ -1,3 +1,4 @@
+/** \file */
 /* SPMG/JPEG-LS IMPLEMENTATION V.2.1
    =====================================
    These programs are Copyright (c) University of British Columbia. All rights reserved.
@@ -69,7 +70,7 @@ without the written permission of the copyright holder.\n\
 FILE *in, *out;
 FILE *c_in[MAX_COMPONENTS];
 FILE *c_out[MAX_COMPONENTS];
-FILE *msgfile = stdout;
+FILE *msgfile;// = stdout;
 
 /* Context quantization thresholds  - initially unset */
 int     T3 = -1,
@@ -106,7 +107,7 @@ char *plane_int_string = "plane by plane",
 
 /* function to print out error messages */
 void error(char *msg) {
-	fprintf(stderr, msg);
+	fputs(msg, stderr);
 	exit(-1);
 }
 
@@ -147,7 +148,7 @@ double get_utime()
 
 
 /* Set thresholds to default unless specified by header: */
-set_thresholds(int alfa, int NEAR, int *T1p, int *T2p, int *T3p)
+static int set_thresholds(int alfa, int NEAR, int *T1p, int *T2p, int *T3p)
 {
 	int lambda,
 	    ilambda = 256/alfa,
@@ -322,7 +323,7 @@ char *ttyfilename = "CON";
 
 #define PAUSE	20
 
-fprint_disclaimer(FILE *fp, int nopause)
+static void fprint_disclaimer(FILE *fp, int nopause)
 {
     char *p0, *p1;
     FILE *ttyf;

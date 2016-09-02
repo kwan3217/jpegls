@@ -1,3 +1,5 @@
+/** \file */
+
 /* SPMG/JPEG-LS IMPLEMENTATION V.2.1
    =====================================
    These programs are Copyright (c) University of British Columbia. All right reserved.

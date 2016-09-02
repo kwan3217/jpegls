@@ -1,3 +1,5 @@
+/** \file */
+
 /* SPMG/JPEG-LS IMPLEMENTATION V.2.1
    =====================================
    These programs are Copyright (c) University of British Columbia. All rights reserved.
@@ -60,7 +62,7 @@
 
 static int eor_limit;
 
-/* Do Golomb-Rice statistics and DECODING for LOSSLESS images */
+/** Do Golomb-Rice statistics and DECODING for LOSSLESS images */
 inline int lossless_regular_mode_d(int Q, int SIGN, int Px)
 {
 	int At, Bt, Nt, Errval, absErrval;
@@ -73,7 +75,7 @@ inline int lossless_regular_mode_d(int Q, int SIGN, int Px)
 	At = A[Q];
 	{
 		/* Estimate k */
-	    register nst = Nt;
+	    int nst = Nt;
 	    for(k=0; nst < At; nst *=2, k++);
 	}
 
@@ -205,8 +207,8 @@ inline int lossless_regular_mode_d(int Q, int SIGN, int Px)
 
 
 
-/* Do end of run DECODING for LOSSLESS images */
-inline pixel lossless_end_of_run_d(pixel Ra, pixel Rb, int RItype)
+/** Do end of run DECODING for LOSSLESS images */
+static inline pixel lossless_end_of_run_d(pixel Ra, pixel Rb, int RItype)
 {
 
 	int Ix,

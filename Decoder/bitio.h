@@ -1,3 +1,5 @@
+/** \file */
+
 /* SPMG/JPEG-LS IMPLEMENTATION V.2.1
    =====================================
    These programs are Copyright (c) University of British Columbia. All rights reserved.
@@ -60,12 +62,12 @@
 #define BUFSIZE ((16*1024)-4) /* Size of input BYTE buffer */
 extern int fp;                /* index into byte  buffer */
 extern int truebufsize;       /* true size of byte buffer ( <= BUFSIZE) */
-extern byte negbuff[];        /* the buffer */
+extern uint8_t negbuff[];        /* the buffer */
 #define buff (negbuff+4)
 
 
 /* BIT I/O variables */
-extern dword reg;         /* BIT buffer for input/output */
+extern uint32_t reg;         /* BIT buffer for input/output */
 extern int bits;          /* number of bits free in bit buffer (on output) */
                           /* (number of bits free)-8 in bit buffer (on input)*/
 #define BITBUFSIZE (8*sizeof(reg))
@@ -82,13 +84,13 @@ extern FILE *in, *out;
 
 extern void bufiinit(FILE *fil);
 
-extern byte fillinbuff(FILE *fil);
+extern uint8_t fillinbuff(FILE *fil);
 
 
 
 /* loads more data in the input buffer (inline code )*/
 #define fillbuffer(no) {                        \
-        byte x;                                 \
+        uint8_t x;                              \
                                                 \
 	assert(no+bits <= 24);			\
         reg <<= no;                             \

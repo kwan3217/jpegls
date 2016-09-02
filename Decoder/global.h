@@ -1,3 +1,5 @@
+/** \file */
+
 /* SPMG/JPEG-LS IMPLEMENTATION V.2.1
    =====================================
    These programs are Copyright (c) University of British Columbia. All rights reserved.
@@ -52,6 +54,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <inttypes.h>
 
 #ifndef GLOBAL_H
 #define GLOBAL_H
@@ -290,9 +293,9 @@ extern int	RESET;
 /****** Type prototypes */
 
 /* Portability types */
-typedef unsigned char byte;
-typedef unsigned short word;
-typedef unsigned long dword;
+//typedef unsigned char byte;
+//typedef unsigned short word;
+//typedef unsigned long dword;
 
 typedef unsigned short pixel;
 

@@ -1,3 +1,5 @@
+/** \file */
+
 /* SPMG/JPEG-LS IMPLEMENTATION V.2.1
    =====================================
    These programs are Copyright (c) University of British Columbia. All rights reserved.
@@ -57,7 +59,7 @@ extern int zeroLUT[];     /* lookup table to find number of leading zeroes */
 
 extern FILE *in, *out;
 
-byte negbuff[BUFSIZE+4];    /* byte I/O buffer, allowing for 4 "negative" 
+uint8_t negbuff[BUFSIZE+4];    /* byte I/O buffer, allowing for 4 "negative" 
 						       locations  */
 
 /*
@@ -75,7 +77,7 @@ int zeroLUT[256];      /* table to find out number of leading zeros */
 
 
 /* BIT I/O variables */
-dword reg; /* BIT buffer for input/output */
+uint32_t reg; /* BIT buffer for input/output */
 int bits;  /* number of bits free in bit buffer (on output) */
 	   /* (number of bits free)-8 in bit buffer (on input)*/
 
@@ -85,7 +87,7 @@ int bits;  /* number of bits free in bit buffer (on output) */
  *  note: some routines are implemented as preprocessor macros. See bitio.h.
  ****************************************************************************/
 
-
+/** */
 void bufiinit(FILE *fil) {
     /* argument is ignored */
     fp = BUFSIZE;
@@ -93,8 +95,8 @@ void bufiinit(FILE *fil) {
     foundeof = 0;
 }
 
-
-byte fillinbuff(FILE *fil)
+/** */
+uint8_t fillinbuff(FILE *fil)
 {
 	int i;
 
@@ -142,7 +144,7 @@ void bitiflush()  {
 	discard, 
 	dbytes,
 	i, k, treg;
-    byte *bp;
+    uint32_t *bp;
 
     filled = 24 - bits;    /* how many bits at the MS part of reg 
 			      have unused data. These correspond to 

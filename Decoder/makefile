@@ -1,8 +1,4 @@
-CC=cc
-PKGNAME=loco
-OPTFLAGS=  -Aa $(CFL) -DBIG_ENDIAN
-
-CFLAGS  = $(OPTFLAGS) $(VFL) $(DFL) -DPGMPREFIX=\"$(PREFIX)\" -DMELCODE -DEXTERNDISTRIB -Dinline="" -DNDEBUG
+CC=gcc
 
 LNKFLAGS = -lm
 
@@ -11,12 +7,7 @@ INCL = global.h jpegmark.h bitio.h
 
 EOBJS = global.o jpegmark.o initialize.o decoder.o lossless_d.o lossy_d.o bitio.o melcode.o
 
-loco:
-	$(MAKE) -$(MAKEFLAGS) VFL="" PREFIX="loco" codec
-
-DECODER = $(PREFIX)d
-
-codec: $(DECODER)
+all: $(EOBJS)
 
 jpegmark.o: jpegmark.c jpegmark.h bitio.h global.h
 
