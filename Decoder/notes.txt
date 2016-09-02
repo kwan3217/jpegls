@@ -1,0 +1,41 @@
+== BIG_ENDIAN is redefined ==
+First off, endian-dependent code is highly suspect anyway. Code should not
+depend on the endian-ness of the host, just that of the byte stream. Examine for
+correctness any code which depends on BIG_ENDIAN, ENDIAN8(), and ENDIAN16().
+
+Secondly, it is set to 1, and running on a little-endian host. 
+
+Thirdly, BIG_ENDIAN is originally pulled in with stdlib.h, in a radically
+different sense. This is OK though, since BIG_ENDIAN obviously wasn't being used
+in the sense that stdlib.h defined it.
+
+=== FILE* msgfile ===
+This was initialized to stdout, and this is not possible in the current
+environment since stdout is a variable. We comment out this initialization in
+global.c. It will have to be initialized in a calling routine someplace. I
+don't like the idea of global variable file handles anyway.
+
+== byte variables ==
+global.h makes a typedef called byte, which refers to an unsigned char. We
+should use <inttypes.h> instead and change all references to byte to use
+uint8_t. Similarly all references to word should be uint16_t and all references
+to dword should be uint32_t. 
+
+== fprintf with no extra arguments ==
+global.c uses fprintf with a passed in argument as the format string, and no
+other arguments. We should use fputs instead, with the reversal of the argument
+order.
+
+== register variables ==
+Several places use register variables with no other assigned type. The register
+tag is dropped and an int type is declared.
+
+:lossless_d.c
+::lossless_regular_mode_d()
+:::variable nst
+
+== inline function referring to static variable ==
+lossless_d.c:251:18: warning: ‘eor_limit’ is static but used in inline function ‘lossless_end_of_run_d’ which is not static
+
+This function does not appear to be used outside of this file (there is no
+lossless_d.h file) so this function is made static
